@@ -1,9 +1,9 @@
 <h1 align="center">Hi 👋, I'm Zerui / 泽瑞</h1>
 <h3 align="center">CS Undergrad + AI Enthusiast + SoEng Hobbyist</h3>
 
-<div width="100%" style="text-align: center">
+<h4 align="center">
     <img style="margin: auto;" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Zerui18&layout=compact&theme=github_dark&langs_count=10&hide=jupyter%20notebook&card_width=400">
-</div>
+</h4>
 
 <br/>
 
