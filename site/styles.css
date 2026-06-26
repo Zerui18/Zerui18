@@ -1,0 +1,202 @@
+/* ---- Design tokens ---------------------------------------------------------- */
+:root {
+  /* Type families */
+  --font-display: 'Jost', -apple-system, system-ui, sans-serif;   /* name + question */
+  --font-body:    'Jost', -apple-system, system-ui, sans-serif;   /* running text     */
+  --font-label:   'Space Mono', ui-monospace, monospace;          /* system micro-text */
+
+  /* Type scale — fluid (min, preferred, max) */
+  --fs-meta:     clamp(10px, 1vw,    11px);
+  --fs-eyebrow:  clamp(10px, 1.05vw, 12px);
+  --fs-name:     clamp(46px, 9.2vw,  118px);
+  --fs-bio:      clamp(17px, 1.5vw,  19px);
+  --fs-question: clamp(26px, 2.8vw,  32px);
+  --fs-link:     clamp(14px, 1.4vw,  17px);
+
+  /* Weights */
+  --fw-light:   300;
+  --fw-regular: 400;
+  --fw-medium:  500;
+
+  /* Line heights */
+  --lh-name:     0.95;
+  --lh-bio:      1.62;
+  --lh-question: 1.3;
+
+  /* Letter spacing */
+  --ls-meta:     0.24em;
+  --ls-eyebrow:  0.3em;
+  --ls-name:     -0.02em;
+  --ls-question: -0.01em;
+  --ls-label:    0.16em;
+
+  /* Spacing & measure */
+  --pad:                clamp(34px, 5.6vw, 82px);   /* page padding        */
+  --gap:                clamp(20px, 4vh,   40px);   /* between page rows   */
+  --gap-hero:           clamp(32px, 6vw,   80px);   /* text ↔ portrait     */
+  --frame-inset:        clamp(16px, 3vw,   34px);   /* corner ticks        */
+  --measure-text:       42rem;                      /* hero text column    */
+  --measure-bio:        56ch;
+  --measure-question:   26ch;
+
+  /* Portrait slot */
+  --portrait-w:     clamp(220px, 26vw, 340px);
+  --portrait-ratio: 3 / 4;
+
+  /* Motion */
+  --ease: cubic-bezier(.2, .6, .2, 1);
+  --dur:  0.2s;
+
+  /* ---- Colour template — default: Terminal ---- */
+  --bg:     #1f211c;
+  --ink:    #cfc9b2;
+  --sub:    rgba(207, 201, 178, 0.62);  /* muted text / labels */
+  --line:   rgba(207, 201, 178, 0.18);  /* hairlines           */
+  --accent: #b98b3e;
+
+  /* ---- Texture (subtle scanlines, tuned for the dark theme) ---- */
+  --tex-line:  rgba(207, 201, 178, 0.5);
+  --tex-op:    0.05;
+  --tex-blend: normal;
+}
+
+/* ---- Alternate colour templates --------------------------------------------
+   Set <html data-theme="sand"> etc. Light themes flip the texture to multiply
+   so the scanlines read as faint ink rather than light. */
+[data-theme="terminal"] { --bg:#1f211c; --ink:#cfc9b2; --sub:rgba(207,201,178,.62); --line:rgba(207,201,178,.18); --accent:#b98b3e; --tex-line:rgba(207,201,178,.5); --tex-op:.05; --tex-blend:normal; }
+[data-theme="sand"]     { --bg:#d6d0bc; --ink:#46422f; --sub:rgba(70,66,47,.66);    --line:rgba(70,66,47,.22);    --accent:#8f6b3d; --tex-line:rgba(70,66,47,.5);    --tex-op:.10; --tex-blend:multiply; }
+[data-theme="sepia"]    { --bg:#e9e3d4; --ink:#564b3c; --sub:rgba(86,75,60,.66);    --line:rgba(86,75,60,.22);    --accent:#a3603f; --tex-line:rgba(86,75,60,.5);    --tex-op:.10; --tex-blend:multiply; }
+[data-theme="concrete"] { --bg:#d6d8d3; --ink:#3d433f; --sub:rgba(61,67,63,.66);    --line:rgba(61,67,63,.22);    --accent:#5e7d74; --tex-line:rgba(61,67,63,.5);    --tex-op:.10; --tex-blend:multiply; }
+[data-theme="sage"]     { --bg:#d3d7c9; --ink:#43473a; --sub:rgba(67,71,58,.66);    --line:rgba(67,71,58,.22);    --accent:#5f7a55; --tex-line:rgba(67,71,58,.5);    --tex-op:.10; --tex-blend:multiply; }
+[data-theme="rust"]     { --bg:#ddd5c5; --ink:#413c33; --sub:rgba(65,60,51,.66);    --line:rgba(65,60,51,.22);    --accent:#a4552f; --tex-line:rgba(65,60,51,.5);    --tex-op:.10; --tex-blend:multiply; }
+
+/* ---- Base / reset ----------------------------------------------------------- */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(207, 201, 178, 0.2); }
+
+/* ---- Decorative overlays ---------------------------------------------------- */
+.texture {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: repeating-linear-gradient(0deg, var(--tex-line) 0 1px, transparent 1px 3px);
+  opacity: var(--tex-op);
+  mix-blend-mode: var(--tex-blend);
+}
+.frame { position: fixed; inset: var(--frame-inset); z-index: 3; pointer-events: none; }
+.frame i { position: absolute; width: 13px; height: 13px; border: 0 solid var(--sub); opacity: .5; }
+.frame i:nth-child(1) { left: 0;  top: 0;    border-left-width: 1px;  border-top-width: 1px; }
+.frame i:nth-child(2) { right: 0; top: 0;    border-right-width: 1px; border-top-width: 1px; }
+.frame i:nth-child(3) { left: 0;  bottom: 0; border-left-width: 1px;  border-bottom-width: 1px; }
+.frame i:nth-child(4) { right: 0; bottom: 0; border-right-width: 1px; border-bottom-width: 1px; }
+
+/* ---- Page scaffold ---------------------------------------------------------- */
+.page {
+  position: relative; z-index: 1;
+  min-height: 100vh; min-height: 100dvh;
+  display: flex; flex-direction: column;
+  gap: var(--gap);
+  padding: var(--pad);
+}
+
+.meta {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--font-label);
+  font-size: var(--fs-meta); letter-spacing: var(--ls-meta);
+  text-transform: uppercase; color: var(--sub);
+}
+
+/* ---- Hero: text + portrait -------------------------------------------------- */
+.hero {
+  flex: 1;
+  display: flex; align-items: center;
+  gap: var(--gap-hero);
+}
+.hero__text {
+  flex: 1 1 auto; min-width: 0;
+  max-width: var(--measure-text);
+  display: flex; flex-direction: column;
+}
+
+.eyebrow {
+  margin: 0 0 clamp(12px, 2vh, 20px);
+  font-family: var(--font-label);
+  font-size: var(--fs-eyebrow); letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase; color: var(--sub);
+}
+.name {
+  margin: 0;
+  font-family: var(--font-display); font-weight: var(--fw-light);
+  font-size: var(--fs-name); line-height: var(--lh-name);
+  letter-spacing: var(--ls-name); color: var(--ink);
+}
+.bio {
+  margin: clamp(20px, 3.2vh, 32px) 0 0;
+  font-family: var(--font-body); font-weight: var(--fw-light);
+  font-size: var(--fs-bio); line-height: var(--lh-bio);
+  max-width: var(--measure-bio); color: var(--sub);
+}
+.question {
+  margin: clamp(24px, 3.6vh, 38px) 0 0;
+  font-family: var(--font-display); font-weight: var(--fw-light);
+  font-size: var(--fs-question); line-height: var(--lh-question);
+  letter-spacing: var(--ls-question); max-width: var(--measure-question);
+  color: var(--ink);
+}
+.accent { color: var(--accent); }
+
+/* Portrait slot */
+.portrait {
+  position: relative; flex: 0 0 auto;
+  width: var(--portrait-w); aspect-ratio: var(--portrait-ratio);
+  margin: 0; overflow: hidden;
+  border: 1px solid var(--line);
+  display: flex; align-items: flex-end;
+}
+.portrait::before {
+  content: ""; position: absolute; inset: 0;
+  background: repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 11px);
+  opacity: .7;
+}
+.portrait > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.portrait__label {
+  position: relative; margin: 12px;
+  font-family: var(--font-label); font-size: 11px;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--sub);
+}
+
+/* ---- Footer links ----------------------------------------------------------- */
+.links {
+  display: flex; flex-wrap: wrap; align-items: flex-end;
+  justify-content: space-between; gap: clamp(18px, 3vw, 32px);
+}
+.links__list { display: flex; flex-wrap: wrap; gap: clamp(16px, 2.6vw, 32px); }
+.link {
+  display: inline-flex; align-items: baseline; gap: 7px;
+  font-family: var(--font-body); font-size: var(--fs-link);
+  padding-bottom: 3px; border-bottom: 1px solid var(--line);
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.link:hover { border-bottom-color: var(--accent); transform: translateY(-2px); }
+.link__arrow { font-family: var(--font-label); font-size: .78em; color: var(--sub); }
+.links__note {
+  font-family: var(--font-label); font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-label); text-transform: uppercase;
+  color: var(--sub); opacity: .85;
+}
+
+/* ---- Responsive ------------------------------------------------------------- */
+@media (max-width: 820px) {
+  .hero { flex-direction: column-reverse; align-items: stretch; gap: clamp(24px, 6vh, 40px); }
+  .portrait { width: clamp(150px, 42vw, 200px); aspect-ratio: 1 / 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .link { transition: none; }
+}
