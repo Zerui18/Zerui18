@@ -1,0 +1,8 @@
+{
+  // Static site served via Workers Static Assets — no Worker script (no "main").
+  "name": "personal-page",
+  "compatibility_date": "2026-06-26",
+  "assets": {
+    "directory": "./site"
+  }
+}
