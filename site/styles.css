@@ -60,14 +60,8 @@
   --tex-blend: normal;
 }
 
-/* ---- Alternate colour templates --------------------------------------------
-   Set <html data-theme="sand"> etc. Light themes flip the texture to multiply
-   so the scanlines read as faint ink rather than light. */
+/* ---- Alternate colour templates (terminal for dark palette [default], rust for light) ---- */
 [data-theme="terminal"] { --bg:#1f211c; --ink:#cfc9b2; --sub:rgba(207,201,178,.62); --line:rgba(207,201,178,.18); --accent:#b98b3e; --tex-line:rgba(207,201,178,.5); --tex-op:.05; --tex-blend:normal; }
-[data-theme="sand"]     { --bg:#d6d0bc; --ink:#46422f; --sub:rgba(70,66,47,.66);    --line:rgba(70,66,47,.22);    --accent:#8f6b3d; --tex-line:rgba(70,66,47,.5);    --tex-op:.10; --tex-blend:multiply; }
-[data-theme="sepia"]    { --bg:#e9e3d4; --ink:#564b3c; --sub:rgba(86,75,60,.66);    --line:rgba(86,75,60,.22);    --accent:#a3603f; --tex-line:rgba(86,75,60,.5);    --tex-op:.10; --tex-blend:multiply; }
-[data-theme="concrete"] { --bg:#d6d8d3; --ink:#3d433f; --sub:rgba(61,67,63,.66);    --line:rgba(61,67,63,.22);    --accent:#5e7d74; --tex-line:rgba(61,67,63,.5);    --tex-op:.10; --tex-blend:multiply; }
-[data-theme="sage"]     { --bg:#d3d7c9; --ink:#43473a; --sub:rgba(67,71,58,.66);    --line:rgba(67,71,58,.22);    --accent:#5f7a55; --tex-line:rgba(67,71,58,.5);    --tex-op:.10; --tex-blend:multiply; }
 [data-theme="rust"]     { --bg:#ddd5c5; --ink:#413c33; --sub:rgba(65,60,51,.66);    --line:rgba(65,60,51,.22);    --accent:#a4552f; --tex-line:rgba(65,60,51,.5);    --tex-op:.10; --tex-blend:multiply; }
 
 /* ---- Base / reset ----------------------------------------------------------- */
