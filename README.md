@@ -1,4 +1,4 @@
-<h1 align="center">Hi 👋, I'm Zerui / 泽瑞</h1>
+<h1 align="center"><a href="https://zeruic.me">Hi 👋, I'm Zerui / 泽瑞</a></h1>
 <h3 align="center">AI Enthusiast + SoEng Hobbyist</h3>
 
 <h4 align="center">
