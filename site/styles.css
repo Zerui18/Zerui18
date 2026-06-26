@@ -5,13 +5,34 @@
   --font-body:    'Jost', -apple-system, system-ui, sans-serif;   /* running text     */
   --font-label:   'Space Mono', ui-monospace, monospace;          /* system micro-text */
 
-  /* Type scale — fluid (min, preferred, max) */
-  --fs-meta:     clamp(10px, 1vw,    11px);
-  --fs-eyebrow:  clamp(10px, 1.05vw, 12px);
-  --fs-name:     clamp(46px, 9.2vw,  118px);
-  --fs-bio:      clamp(17px, 1.5vw,  19px);
-  --fs-question: clamp(26px, 2.8vw,  32px);
-  --fs-link:     clamp(14px, 1.4vw,  17px);
+  /* ---- Type-size dials --------------------------------------------------------
+     --fs-scale multiplies everything; the per-group --k-* multipliers fine-tune each role. */
+  --fs-scale:   1;   /* overall            */
+  --k-name:     1;   /* hero name          */
+  --k-question: 1;   /* hero question      */
+  --k-body:     1;   /* hero bio + intros  */
+  --k-project:  1;   /* project titles     */
+  --k-paper:    1;   /* paper title        */
+  --k-note:     1;   /* descriptions       */
+  --k-link:     1;   /* links              */
+  --k-label:    1;   /* mono micro-labels  */
+  --k-langname: 1;   /* language names     */
+
+  /* Type scale = calc(base · overall · role). Preferred values are rem+vw (not pure
+     vw) so text keeps a comfortable floor and doesn't shrink toward the clamp
+     minimum as the viewport narrows. */
+  --fs-meta:        calc(clamp(10.5px, 0.60rem + 0.20vw, 12px)   * var(--fs-scale) * var(--k-label));
+  --fs-eyebrow:     calc(clamp(11px,   0.62rem + 0.25vw, 12.5px) * var(--fs-scale) * var(--k-label));
+  --fs-section:     calc(clamp(11.5px, 0.65rem + 0.30vw, 13px)   * var(--fs-scale) * var(--k-label));   /* section number labels */
+  --fs-tech:        calc(clamp(10.5px, 0.60rem + 0.25vw, 12px)   * var(--fs-scale) * var(--k-label));   /* tech tags / meta      */
+  --fs-name:        calc(clamp(48px,   7.5vw  + 0.5rem,  120px)  * var(--fs-scale) * var(--k-name));
+  --fs-question:    calc(clamp(27px,   1.40rem + 1.10vw, 33px)   * var(--fs-scale) * var(--k-question));
+  --fs-project:     calc(clamp(21px,   1.10rem + 0.90vw, 27px)   * var(--fs-scale) * var(--k-project));   /* project titles */
+  --fs-paper-title: calc(clamp(23px,   1.20rem + 1.20vw, 33px)   * var(--fs-scale) * var(--k-paper));    /* paper title    */
+  --fs-bio:         calc(clamp(17.5px, 0.95rem + 0.55vw, 21px)   * var(--fs-scale) * var(--k-body));     /* hero / intro body */
+  --fs-note:        calc(clamp(15.5px, 0.90rem + 0.50vw, 17.5px) * var(--fs-scale) * var(--k-note));     /* descriptions      */
+  --fs-link:        calc(clamp(15px,   0.85rem + 0.45vw, 17.5px) * var(--fs-scale) * var(--k-link));     /* links             */
+  --fs-lang-name:   calc(clamp(16.5px, 0.92rem + 0.40vw, 18.5px) * var(--fs-scale) * var(--k-langname)); /* language names */
 
   /* Weights */
   --fw-light:   300;
@@ -31,13 +52,16 @@
   --ls-label:    0.16em;
 
   /* Spacing & measure */
-  --pad:                clamp(34px, 5.6vw, 82px);   /* page padding        */
-  --gap:                clamp(20px, 4vh,   40px);   /* between page rows   */
-  --gap-hero:           clamp(32px, 6vw,   80px);   /* text ↔ portrait     */
-  --frame-inset:        clamp(16px, 3vw,   34px);   /* corner ticks        */
-  --measure-text:       42rem;                      /* hero text column    */
+  --pad:                clamp(34px, 5.6vw, 82px);   /* page padding              */
+  --gap:                clamp(20px, 4vh,   40px);   /* between page rows         */
+  --gap-hero:           clamp(32px, 6vw,   80px);   /* text ↔ portrait           */
+  --gap-section:        clamp(56px, 9vh,   104px);  /* between content sections  */
+  --frame-inset:        clamp(16px, 3vw,   34px);   /* corner ticks              */
+  --measure-text:       42rem;                      /* hero text column          */
   --measure-bio:        56ch;
   --measure-question:   26ch;
+  --measure-sections:   74rem;                      /* content sections column   */
+  --measure-prose:      74ch;                       /* project descriptions      */
 
   /* Portrait slot */
   --portrait-w:     clamp(220px, 26vw, 340px);
@@ -51,6 +75,7 @@
   --bg:     #1f211c;
   --ink:    #cfc9b2;
   --sub:    rgba(207, 201, 178, 0.62);  /* muted text / labels */
+  --label:  rgba(207, 201, 178, 0.85);  /* marked micro-labels (higher contrast) */
   --line:   rgba(207, 201, 178, 0.18);  /* hairlines           */
   --accent: #b98b3e;
 
@@ -60,14 +85,32 @@
   --tex-blend: normal;
 }
 
-/* ---- Alternate colour templates (terminal for dark palette [default], rust for light) ---- */
-[data-theme="terminal"] { --bg:#1f211c; --ink:#cfc9b2; --sub:rgba(207,201,178,.62); --line:rgba(207,201,178,.18); --accent:#b98b3e; --tex-line:rgba(207,201,178,.5); --tex-op:.05; --tex-blend:normal; }
-[data-theme="rust"]     { --bg:#ddd5c5; --ink:#413c33; --sub:rgba(65,60,51,.66);    --line:rgba(65,60,51,.22);    --accent:#a4552f; --tex-line:rgba(65,60,51,.5);    --tex-op:.10; --tex-blend:multiply; }
+/* ---- Colour templates (terminal = dark [default], rust = light) ------------- */
+[data-theme="terminal"] { --bg:#1f211c; --ink:#cfc9b2; --sub:rgba(207,201,178,.62); --label:rgba(207,201,178,.85); --line:rgba(207,201,178,.18); --accent:#b98b3e; --tex-line:rgba(207,201,178,.5); --tex-op:.05; --tex-blend:normal; }
+[data-theme="rust"]     { --bg:#ddd5c5; --ink:#413c33; --sub:rgba(65,60,51,.80);    --label:rgba(65,60,51,.96);    --line:rgba(65,60,51,.22);    --accent:#a4552f; --tex-line:rgba(65,60,51,.5);    --tex-op:.10; --tex-blend:normal; }
+
+/* Light (Rust) theme */
+[data-theme="rust"] .bio,
+[data-theme="rust"] .section__intro,
+[data-theme="rust"] .project__desc,
+[data-theme="rust"] .lang__note,
+[data-theme="rust"] .paper__title,
+[data-theme="rust"] .paper__abstract span { font-weight: var(--fw-regular); }
+
+/* Dark (Terminal) theme */
+[data-theme="terminal"] .bio,
+[data-theme="terminal"] .section__intro,
+[data-theme="terminal"] .project__desc,
+[data-theme="terminal"] .lang__note,
+[data-theme="terminal"] .paper__title,
+[data-theme="terminal"] .paper__abstract span { font-weight: 350; }
 
 /* ---- Base / reset ----------------------------------------------------------- */
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body {
+  position: relative;
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
@@ -76,6 +119,7 @@ body {
 }
 a { color: inherit; text-decoration: none; }
 ::selection { background: rgba(207, 201, 178, 0.2); }
+:target { scroll-margin-top: 32px; }
 
 /* ---- Decorative overlays ---------------------------------------------------- */
 .texture {
@@ -84,12 +128,36 @@ a { color: inherit; text-decoration: none; }
   opacity: var(--tex-op);
   mix-blend-mode: var(--tex-blend);
 }
-.frame { position: fixed; inset: var(--frame-inset); z-index: 3; pointer-events: none; }
+/* Corner ticks bracket the whole document and scroll with it (absolute, not fixed). */
+.frame { position: absolute; inset: var(--frame-inset); z-index: 3; pointer-events: none; }
 .frame i { position: absolute; width: 13px; height: 13px; border: 0 solid var(--sub); opacity: .5; }
 .frame i:nth-child(1) { left: 0;  top: 0;    border-left-width: 1px;  border-top-width: 1px; }
 .frame i:nth-child(2) { right: 0; top: 0;    border-right-width: 1px; border-top-width: 1px; }
 .frame i:nth-child(3) { left: 0;  bottom: 0; border-left-width: 1px;  border-bottom-width: 1px; }
 .frame i:nth-child(4) { right: 0; bottom: 0; border-right-width: 1px; border-bottom-width: 1px; }
+
+/* ---- Standardised link interactions ----------------------------------------- */
+/* Standalone links (nav, profile, project titles, paper link):
+   a hairline underline that turns accent + lifts 2px on hover. */
+.link, .nav__link, .project__title, .paper__link {
+  border-bottom: 1px solid var(--line);
+  transition: color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              transform var(--dur) var(--ease);
+}
+.link:hover, .nav__link:hover, .project__title:hover, .paper__link:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  transform: translateY(-2px);
+}
+/* Inline links (inside running text): same underline + accent, but no lift. */
+.ilink {
+  border-bottom: 1px solid var(--line);
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.ilink:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+.link__arrow { font-family: var(--font-label); font-size: .78em; color: var(--sub); }
 
 /* ---- Page scaffold ---------------------------------------------------------- */
 .page {
@@ -100,30 +168,66 @@ a { color: inherit; text-decoration: none; }
   padding: var(--pad);
 }
 
+/* ---- Meta header ------------------------------------------------------------ */
 .meta {
-  display: flex; justify-content: space-between; align-items: center;
-  font-family: var(--font-label);
-  font-size: var(--fs-meta); letter-spacing: var(--ls-meta);
-  text-transform: uppercase; color: var(--sub);
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
 }
+.meta__sig {                       /* personal signature, top-left (full name 陈泽瑞) */
+  position: relative;
+  font-family: var(--font-label);
+  font-size: clamp(11px, 1.1vw, 13px);
+  letter-spacing: .22em; color: var(--label);
+}
+.meta__sig-py {                    /* pinyin + tone marks, revealed below on hover */
+  position: absolute; top: 100%; left: 0; margin-top: 7px;
+  white-space: nowrap;
+  font-family: var(--font-label); font-size: clamp(9.5px, 0.95vw, 11px);
+  letter-spacing: .12em; color: var(--sub);
+  opacity: 0; transform: translateY(-3px); pointer-events: none;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.meta__sig:hover .meta__sig-py { opacity: 1; transform: none; }
+.meta__right { display: flex; align-items: center; gap: clamp(14px, 1.8vw, 24px); }
+.nav { display: flex; gap: clamp(12px, 1.6vw, 20px); }
+.nav__link {
+  position: relative;
+  font-family: var(--font-label);
+  font-size: var(--fs-meta); letter-spacing: var(--ls-label);
+  text-transform: uppercase; color: var(--label);
+  padding-bottom: 3px;
+}
+/* On hover, a downward chevron sits below the underline — "content is below" */
+.nav__link::after {
+  content: "";
+  position: absolute; left: 50%; top: calc(100% + 4px);
+  width: 5px; height: 5px;
+  border-right: 1.5px solid var(--accent);
+  border-bottom: 1.5px solid var(--accent);
+  transform: translate(-50%, -3px) rotate(45deg);
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.nav__link:hover::after { opacity: 1; transform: translate(-50%, 0) rotate(45deg); }
+
+/* Theme toggle — a quiet half-filled dot that flips Terminal ↔ Rust */
+.theme-toggle {
+  width: 15px; height: 15px; flex: 0 0 auto; padding: 0;
+  border-radius: 50%; border: 1px solid var(--sub);
+  background: linear-gradient(90deg, var(--ink) 0 50%, transparent 50% 100%);
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease), transform .25s var(--ease);
+}
+.theme-toggle:hover { border-color: var(--accent); transform: rotate(180deg); }
 
 /* ---- Hero: text + portrait -------------------------------------------------- */
-.hero {
-  flex: 1;
-  display: flex; align-items: center;
-  gap: var(--gap-hero);
-}
-.hero__text {
-  flex: 1 1 auto; min-width: 0;
-  max-width: var(--measure-text);
-  display: flex; flex-direction: column;
-}
+.hero { flex: 1; display: flex; align-items: center; gap: var(--gap-hero); }
+.hero__text { flex: 1 1 auto; min-width: 0; max-width: var(--measure-text); display: flex; flex-direction: column; }
 
 .eyebrow {
   margin: 0 0 clamp(12px, 2vh, 20px);
   font-family: var(--font-label);
   font-size: var(--fs-eyebrow); letter-spacing: var(--ls-eyebrow);
-  text-transform: uppercase; color: var(--sub);
+  text-transform: uppercase; color: var(--label);
 }
 .name {
   margin: 0;
@@ -166,7 +270,7 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: .2em; text-transform: uppercase; color: var(--sub);
 }
 
-/* ---- Footer links ----------------------------------------------------------- */
+/* ---- Hero footer: profile links + scroll cue -------------------------------- */
 .links {
   display: flex; flex-wrap: wrap; align-items: flex-end;
   justify-content: space-between; gap: clamp(18px, 3vw, 32px);
@@ -175,22 +279,80 @@ a { color: inherit; text-decoration: none; }
 .link {
   display: inline-flex; align-items: baseline; gap: 7px;
   font-family: var(--font-body); font-size: var(--fs-link);
-  padding-bottom: 3px; border-bottom: 1px solid var(--line);
-  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+  padding-bottom: 3px;
 }
-.link:hover { border-bottom-color: var(--accent); transform: translateY(-2px); }
-.link__arrow { font-family: var(--font-label); font-size: .78em; color: var(--sub); }
-.links__note {
+
+/* Scroll cue — sits where a footer note would; nudges the reader downward */
+.scroll-cue {
+  display: inline-flex; align-items: center; gap: 8px;
   font-family: var(--font-label); font-size: var(--fs-eyebrow);
-  letter-spacing: var(--ls-label); text-transform: uppercase;
-  color: var(--sub); opacity: .85;
+  letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--sub);
+  transition: color var(--dur) var(--ease);
 }
+.scroll-cue:hover { color: var(--accent); }
+.scroll-cue__chevron { font-size: 13px; line-height: 1; display: inline-block; animation: zc-bob 1.8s ease-in-out infinite; }
+@keyframes zc-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+/* ---- Content sections (Research · Projects · Languages) --------------------- */
+.sections { position: relative; z-index: 1; padding: 0 var(--pad) clamp(64px, 9vh, 120px); }
+.sections__inner {
+  max-width: var(--measure-sections); margin: 0 auto;
+  display: flex; flex-direction: column; gap: var(--gap-section);
+}
+.section__head { display: flex; align-items: baseline; gap: 18px; margin-bottom: clamp(8px, 1.4vh, 14px); }
+.section__num {
+  font-family: var(--font-label); font-size: var(--fs-section);
+  letter-spacing: var(--ls-meta); text-transform: uppercase;
+  color: var(--accent); white-space: nowrap;
+}
+.section__rule { flex: 1; height: 1px; background: var(--line); }
+.section__intro {
+  margin: 0 0 clamp(22px, 3vh, 32px);
+  font-family: var(--font-body); font-weight: var(--fw-light);
+  font-size: var(--fs-bio); line-height: 1.55; max-width: 54ch; color: var(--sub);
+}
+
+/* Languages — icon + name + one-line note, in a responsive grid */
+.langs { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); column-gap: clamp(28px, 4vw, 60px); }
+.lang { display: flex; gap: 14px; align-items: flex-start; padding: 15px 0; border-bottom: 1px solid var(--line); }
+.lang__icon { font-size: 23px; line-height: 1; flex: 0 0 auto; margin-top: 2px; color: var(--ink); opacity: .9; } /* devicon -plain glyph, inherits ink */
+.lang__name { font-family: var(--font-body); font-weight: var(--fw-regular); font-size: var(--fs-lang-name); color: var(--ink); }
+.lang__note { margin-top: 3px; font-family: var(--font-body); font-weight: var(--fw-light); font-size: var(--fs-note); line-height: 1.5; color: var(--sub); }
+
+/* Projects — hairline-separated list; title is the only interactive element */
+.projects { border-bottom: 1px solid var(--line); }
+.project { padding: clamp(20px, 3vh, 28px) 0; border-top: 1px solid var(--line); }
+.project__top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 18px; }
+.project__titles { display: inline-flex; align-items: baseline; gap: 6px; font-family: var(--font-display); font-size: var(--fs-project); }
+.project__title {
+  display: inline-flex; align-items: baseline; gap: 6px;
+  font-family: var(--font-display); font-weight: var(--fw-regular);
+  font-size: var(--fs-project); letter-spacing: -.01em; color: var(--ink);
+  padding-bottom: 4px;
+}
+.project__titles .project__title { font-size: inherit; }
+.project__amp { color: var(--sub); font-size: .7em; }
+.project__tech { font-family: var(--font-label); font-size: var(--fs-tech); letter-spacing: .08em; color: var(--label); text-align: right; }
+.project__desc { margin: 11px 0 0; font-family: var(--font-body); font-weight: var(--fw-light); font-size: var(--fs-note); line-height: 1.6; color: var(--sub); max-width: var(--measure-prose); }
+
+/* Research — single placeholder paper card */
+.paper { border: 1px solid var(--line); padding: clamp(22px, 3.4vw, 40px); max-width: 74rem; }
+.paper__kicker { font-family: var(--font-label); font-size: var(--fs-tech); letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+.paper__title { margin: 14px 0 0; font-family: var(--font-display); font-weight: var(--fw-light); font-size: var(--fs-paper-title); line-height: 1.2; letter-spacing: -.01em; color: var(--sub); }
+.paper__meta { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px 22px; font-family: var(--font-label); font-size: var(--fs-meta); letter-spacing: .08em; color: var(--sub); }
+.paper__abstract { margin-top: 18px; position: relative; display: flex; align-items: start; justify-content: left; overflow: hidden; }
+.paper__abstract span { margin: 11px 0 0; font-family: var(--font-body); font-weight: var(--fw-light); font-size: var(--fs-note); line-height: 1.6; color: var(--sub); max-width: var(--measure-prose) }
+.paper__link { display: inline-flex; align-items: baseline; gap: 7px; margin-top: 20px; font-family: var(--font-body); font-size: var(--fs-link); color: var(--ink); padding-bottom: 3px; }
 
 /* ---- Responsive ------------------------------------------------------------- */
 @media (max-width: 820px) {
   .hero { flex-direction: column-reverse; align-items: stretch; gap: clamp(24px, 6vh, 40px); }
   .portrait { width: clamp(150px, 42vw, 200px); aspect-ratio: 1 / 1; }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .link { transition: none; }
+  html { scroll-behavior: auto; }
+  .link, .nav__link, .project__title, .paper__link, .theme-toggle, .scroll-cue { transition: none; }
+  .scroll-cue__chevron { animation: none; }
+  .link:hover, .nav__link:hover, .project__title:hover, .paper__link:hover, .theme-toggle:hover { transform: none; }
 }

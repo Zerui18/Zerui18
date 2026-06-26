@@ -3,11 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Zerui Chen — Deep-Learning Theory</title>
+  <title>Zerui Chen - About me</title>
   <meta name="description" content="Zerui Chen — theoretical foundations of deep-learning architecture." />
+
+  <!-- Restore saved theme before paint (avoids a flash); expose the toggle. -->
+  <script>
+    (function () {
+      var KEY = 'zc-theme', root = document.documentElement;
+      try { var t = localStorage.getItem(KEY); if (t) root.setAttribute('data-theme', t); } catch (e) {}
+      window.toggleTheme = function () {
+        var next = root.getAttribute('data-theme') === 'rust' ? 'terminal' : 'rust';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem(KEY, next); } catch (e) {}
+      };
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300..500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -15,23 +30,31 @@
   <div class="texture" aria-hidden="true"></div>
   <div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
+  <!-- ===== Hero screen ====================================================== -->
   <main class="page">
     <header class="meta">
-      <span>Index</span>
-      <span>Artificial Intelligence · Theory</span>
+      <span class="meta__sig">陈泽瑞<span class="meta__sig-py" aria-hidden="true">chén zé ruì</span></span>
+      <div class="meta__right">
+        <nav class="nav" aria-label="Sections">
+          <a class="nav__link" href="#research">Research</a>
+          <a class="nav__link" href="#projects">Projects</a>
+          <a class="nav__link" href="#languages">Prog Langs</a>
+        </nav>
+        <button class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle theme — Terminal / Rust"></button>
+      </div>
     </header>
 
     <section class="hero">
       <div class="hero__text">
-        <p class="eyebrow">Artificial Intelligence Theory</p>
+        <p class="eyebrow">AI Scientist · SWE Hobbyist</p>
         <h1 class="name">Zerui Chen</h1>
         <p class="bio">I currently work on the theoretical foundations of deep-learning architecture — theory first, validated by experiment.
-            My interests span machine learning and AI broadly, from the intricacies of DL/RL to the design of autonomous systems, all in service of one question.</p>
+          My interests span machine learning and AI broadly, from the intricacies of DL/RL to the design of autonomous systems, all in service of one question.</p>
         <p class="question">What is <span class="accent">intelligence</span>? How do we create it — and is human intelligence the only kind?</p>
       </div>
 
       <figure class="portrait" aria-label="Portrait of Zerui Chen">
-          <img src="assets/portrait.png" alt="Zerui Chen" />
+        <img src="assets/portrait.png" alt="Zerui Chen" />
         <span class="portrait__label"></span>
       </figure>
     </section>
@@ -41,10 +64,135 @@
         <a class="link" href="https://github.com/Zerui18" target="_blank" rel="noopener">GitHub<span class="link__arrow">↗</span></a>
         <a class="link" href="https://www.linkedin.com/in/zerui-chen-241015204/" target="_blank" rel="noopener">LinkedIn<span class="link__arrow">↗</span></a>
         <a class="link" href="https://scholar.google.com/citations?hl=en&amp;user=N3_D8QQAAAAJ" target="_blank" rel="noopener">Google&nbsp;Scholar<span class="link__arrow">↗</span></a>
+        <a class="link" href="./assets/resume.pdf" target="_blank" rel="noopener">Résumé<span class="link__arrow">↗</span></a>
         <a class="link" href="mailto:hi@zeruic.me">Email<span class="link__arrow">↗</span></a>
       </nav>
-      <span class="links__note">More — soon</span>
+      <a class="scroll-cue" href="#research" aria-label="Scroll down for more">
+        <span>Scroll down</span><span class="scroll-cue__chevron" aria-hidden="true">↓</span>
+      </a>
     </footer>
   </main>
+
+  <!-- ===== Content sections ================================================= -->
+  <div class="sections">
+    <div class="sections__inner">
+
+      <!-- 01 — Research -->
+      <section id="research" class="section">
+        <div class="section__head">
+          <span class="section__num">01 — Research</span>
+          <span class="section__rule" aria-hidden="true"></span>
+        </div>
+        <p class="section__intro">Work I've had a hand in.</p>
+
+        <article class="paper">
+          <span class="paper__kicker">AID-Wild Workshop @ ACM CAIS 2026 · May 2026</span>
+          <h3 class="paper__title">Evolution Fine-Tuning: Learning to Discover Across 371 Optimization Tasks</h3>
+          <div class="paper__meta">
+            <span>Young-Jun Lee · Seungone Kim · Minki Kang · Alistair Cheong · Zerui Chen · Seungho Han · Taehee Jung · Dongyeop Kang</span>
+          </div>
+          <div class="paper__abstract">
+            <span>We introduce Evolution Fine-Tuning (EFT), a framework that fine-tunes LLMs on a large-scale collection of evolutionary trajectories drawn from search-based scaffolds.</span>
+          </div>
+          <a class="paper__link" href="https://openreview.net/forum?id=UJpQBUIqON" target="_blank" rel="noopener">View on OpenReview<span class="link__arrow">↗</span></a>
+        </article>
+      </section>
+
+      <!-- 02 — Projects -->
+      <section id="projects" class="section">
+        <div class="section__head">
+          <span class="section__num">02 — Projects</span>
+          <span class="section__rule" aria-hidden="true"></span>
+        </div>
+        <p class="section__intro">A handful of things I've built and still care about.</p>
+
+        <div class="projects">
+          <div class="project">
+            <div class="project__top">
+              <a class="project__title" href="https://github.com/cheongalc/nanodiscover" target="_blank" rel="noopener">nanodiscover<span class="link__arrow">↗</span></a>
+              <span class="project__tech">Ray+vLLM · DeepSpeed · Slurm · AWS</span>
+            </div>
+            <p class="project__desc">A clean reimplementation of <a class="ilink" href="https://arxiv.org/abs/2601.16175" target="_blank" rel="noopener">TTT-Discover</a>, a <b>SOTA test-time-learning automated discovery system</b> (online RL over a quality-diversity archive). Adopted as the test-time-RL scaffold in <a class="ilink" href="https://openreview.net/forum?id=UJpQBUIqON" target="_blank" rel="noopener">Evolution Fine-Tuning</a> (coauthored; AID-Wild Workshop @ ACM CAIS 2026). Ongoing research building on it to systematically analyze ADS failure modes and propose targeted interventions for search efficiency &amp; effectiveness, deployed on HPC clusters.</p>
+          </div>
+
+          <div class="project">
+            <div class="project__top">
+              <a class="project__title" href="https://github.com/Zerui18/zlab" target="_blank" rel="noopener">zlab<span class="link__arrow">↗</span></a>
+              <span class="project__tech">PyTorch · Lightning · Pandas</span>
+            </div>
+            <p class="project__desc">A <b>modular deep learning research platform</b> for rapid experimentation with transformer architectures, enabling systematic ablation studies across attention mechanisms, positional encodings, and training configurations via a registry-driven composition system. Designed for seq2seq tasks (machine translation, speech-to-text) with built-in experiment management for grid search and metric-tracked evaluation.</p>
+          </div>
+
+          <div class="project">
+            <div class="project__top">
+              <span class="project__titles">
+                <a class="project__title" href="https://github.com/Zerui18/Frame" target="_blank" rel="noopener">Frame</a>
+                <span class="project__amp">&amp;</span>
+                <a class="project__title" href="https://github.com/Zerui18/FrameApp" target="_blank" rel="noopener">Frame&nbsp;App<span class="link__arrow">↗</span></a>
+              </span>
+              <span class="project__tech">UIKit · SwiftUI · CoreData · Cydia Substrate</span>
+            </div>
+            <p class="project__desc">An iOS <b>jailbroken tweak, app, and cli</b> to play videos as wallpaper on lock &amp; home screens. Performance optimized &amp; video catalogue built-in. Checkout the release posts on Reddit to see it in action:
+                <a class="ilink" href="https://www.reddit.com/r/jailbreak/comments/fevsma/upcoming_frame_20_bring_your_idevice_to_life_with/" target="_blank" rel="noopener">V2</a> ·
+                <a class="ilink" href="https://www.reddit.com/r/jailbreak/comments/u4mszv/update_frame_30_modern_video_wallpaper_hub_for/" target="_blank" rel="noopener">V3</a>
+            </p>
+          </div>
+
+          <div class="project">
+            <div class="project__top">
+              <a class="project__title" href="https://github.com/Zerui18/MML-Book" target="_blank" rel="noopener">MML Book<span class="link__arrow">↗</span></a>
+              <span class="project__tech">NumPy · SymPy · Matplotlib · LaTeX</span>
+            </div>
+            <p class="project__desc">Typesetting the full solutions to <a class="ilink" href="https://mml-book.github.io" target="_blank" rel="noopener"><b>Mathematics for Machine Learning</b></a>, implementing with basic NumPy ops the core linear algebra, regression and bayesian inference algorithms.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 — Languages -->
+      <section id="languages" class="section">
+        <div class="section__head">
+          <span class="section__num">03 — Prog Langs</span>
+          <span class="section__rule" aria-hidden="true"></span>
+        </div>
+        <p class="section__intro">What I reach for these days.</p>
+
+        <div class="langs">
+          <div class="lang">
+            <i class="devicon-python-plain lang__icon" aria-hidden="true"></i>
+            <div><div class="lang__name">Python</div><div class="lang__note">My everyday go-to — versatile and unfussy, the first thing I reach for, from a quick script to a research run.</div></div>
+          </div>
+          <div class="lang">
+            <i class="devicon-swift-plain lang__icon" aria-hidden="true"></i>
+            <div><div class="lang__name">Swift</div><div class="lang__note"><b>The first language I ever learned</b> — six-plus years of iOS apps. I build fewer now, but it's the good old friend I started with.</div></div>
+          </div>
+          <div class="lang">
+            <i class="devicon-typescript-plain lang__icon" aria-hidden="true"></i>
+            <div><div class="lang__name">TypeScript</div><div class="lang__note">My way onto the web — what I lean on for every site and front-end I build.</div></div>
+          </div>
+          <div class="lang">
+            <i class="devicon-cplusplus-plain lang__icon" aria-hidden="true"></i>
+            <div><div class="lang__name">C++</div><div class="lang__note">For the heavy, low-level work when I need it — powerful, though its syntax and I have never quite gotten along.</div></div>
+          </div>
+          <div class="lang">
+            <i class="devicon-rust-original lang__icon" aria-hidden="true"></i>
+            <div><div class="lang__name">Rust</div><div class="lang__note">The new one — learned properly, ground-up from the reference, and so far I'm sold. Likely my driver for what's next.</div></div>
+          </div>
+          <div class="lang">
+            <i class="devicon-java-plain lang__icon" aria-hidden="true"></i>
+            <div><div class="lang__name">Java</div><div class="lang__note">Old reliable — where a lot of the fundamentals first clicked for me.</div></div>
+          </div>
+          <div class="lang">
+            <i class="devicon-ocaml-plain lang__icon" aria-hidden="true"></i>
+            <div><div class="lang__name">OCaml</div><div class="lang__note">Met it in a Cambridge Tripos course — a fresh, almost mathematical take on programming, even if I've yet to use it outside school.</div></div>
+          </div>
+          <div class="lang">
+            <i class="devicon-latex-plain lang__icon" aria-hidden="true"></i>
+            <div><div class="lang__name">LaTeX</div><div class="lang__note">Always for typesetting — verbose and fiddly, but until something better catches on, it's what makes papers look right.</div></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
 </body>
 </html>
