@@ -38,6 +38,7 @@
   --fw-light:   300;
   --fw-regular: 400;
   --fw-medium:  500;
+  --fw-bold:    700;
 
   /* Line heights */
   --lh-name:     0.95;
@@ -57,11 +58,8 @@
   --gap-hero:           clamp(32px, 6vw,   80px);   /* text ↔ portrait           */
   --gap-section:        clamp(56px, 9vh,   104px);  /* between content sections  */
   --frame-inset:        clamp(16px, 3vw,   34px);   /* corner ticks              */
-  --measure-text:       42rem;                      /* hero text column          */
-  --measure-bio:        56ch;
-  --measure-question:   26ch;
+  --measure-text:       55rem;                      /* hero text column — bio, question and now all fill it */
   --measure-sections:   74rem;                      /* content sections column   */
-  --measure-prose:      74ch;                       /* project descriptions      */
 
   /* Portrait slot */
   --portrait-w:     clamp(220px, 26vw, 340px);
@@ -96,6 +94,12 @@
 [data-theme="rust"] .lang__note,
 [data-theme="rust"] .paper__title,
 [data-theme="rust"] .paper__abstract span { font-weight: var(--fw-regular); }
+/* Mono micro-text (Space Mono ships only 400/700), so its light-mode step up is bold. */
+[data-theme="rust"] .now,
+[data-theme="rust"] .now b,
+[data-theme="rust"] .paper__meta,
+[data-theme="rust"] .paper .paper__abstract .paper__note { font-weight: var(--fw-bold); }
+[data-theme="rust"] .portrait { border-color: var(--ink); }   /* dark frame on the light ground */
 
 /* Dark (Terminal) theme */
 [data-theme="terminal"] .bio,
@@ -156,6 +160,13 @@ a { color: inherit; text-decoration: none; }
   transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 .ilink:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ---- Standardised prose setting --------------------------------------------- */
+/* Long-measure running text (project descriptions, paper tl;drs) is justified like a paper abstract;
+   auto-hyphenation and `text-wrap: pretty` (full-paragraph line fitting where supported) keep the
+   word gaps even. Shorter measures (hero bio and question, section intros, language notes) stay
+   ragged-right: with few words per line, justification spreads them unevenly. */
+.project__desc, .paper__tldr { text-align: justify; -webkit-hyphens: auto; hyphens: auto; text-wrap: pretty; }
 
 .link__arrow { font-family: var(--font-label); font-size: .78em; color: var(--sub); }
 
@@ -239,18 +250,23 @@ a { color: inherit; text-decoration: none; }
   margin: clamp(20px, 3.2vh, 32px) 0 0;
   font-family: var(--font-body); font-weight: var(--fw-light);
   font-size: var(--fs-bio); line-height: var(--lh-bio);
-  max-width: var(--measure-bio); color: var(--sub);
+  color: var(--sub);
 }
 .question {
   margin: clamp(24px, 3.6vh, 38px) 0 0;
   font-family: var(--font-display); font-weight: var(--fw-light);
   font-size: var(--fs-question); line-height: var(--lh-question);
-  letter-spacing: var(--ls-question); max-width: var(--measure-question);
+  letter-spacing: var(--ls-question);
   color: var(--ink);
 }
 .accent { color: var(--accent); }
 .now { margin-top: 33px; font-family: var(--font-label); font-size: 12px; letter-spacing: .04em; color: var(--sub); }
 .now b { color: var(--ink); font-weight: 500; }
+.now__label { margin: 0; }
+/* Current items stack under the label; each hangs off an accent em dash (same mark as .paper__note). */
+.now__list { margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; line-height: 1.5; }
+.now__list li { position: relative; padding-left: 1.6em; }
+.now__list li::before { content: "\2014"; position: absolute; left: 0; color: var(--accent); }
 
 /* Portrait slot */
 .portrait {
@@ -335,7 +351,7 @@ a { color: inherit; text-decoration: none; }
 .project__titles .project__title { font-size: inherit; }
 .project__amp { color: var(--sub); font-size: .7em; }
 .project__tech { font-family: var(--font-label); font-size: var(--fs-tech); letter-spacing: .08em; color: var(--label); text-align: right; }
-.project__desc { margin: 11px 0 0; font-family: var(--font-body); font-weight: var(--fw-light); font-size: var(--fs-note); line-height: 1.6; color: var(--sub); max-width: var(--measure-prose); }
+.project__desc { margin: 11px 0 0; font-family: var(--font-body); font-weight: var(--fw-light); font-size: var(--fs-note); line-height: 1.6; color: var(--sub); }   /* spans the row */
 
 /* Research — single placeholder paper card */
 .paper { border: 1px solid var(--line); padding: clamp(22px, 3.4vw, 40px); max-width: 74rem; }
@@ -343,8 +359,10 @@ a { color: inherit; text-decoration: none; }
 .paper__kicker { font-family: var(--font-label); font-size: var(--fs-tech); letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
 .paper__title { margin: 14px 0 0; font-family: var(--font-display); font-weight: var(--fw-light); font-size: var(--fs-paper-title); line-height: 1.2; letter-spacing: -.01em; color: var(--ink); }
 .paper__meta { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px 22px; font-family: var(--font-label); font-size: var(--fs-meta); letter-spacing: .08em; color: var(--sub); }
+/* The abstract box spans the card: the tl;dr (.paper__tldr, set by the standardised prose rule) and the
+   note below share its exact left and right edges (both fill the box). */
 .paper__abstract { margin-top: 18px; position: relative; display: flex; align-items: start; justify-content: left; overflow: hidden; }
-.paper__abstract span { margin: 11px 0 0; font-family: var(--font-body); font-weight: var(--fw-light); font-size: var(--fs-note); line-height: 1.6; color: var(--sub); max-width: var(--measure-prose) }
+.paper__abstract span { margin: 11px 0 0; font-family: var(--font-body); font-weight: var(--fw-light); font-size: var(--fs-note); line-height: 1.6; color: var(--sub); }
 .paper__link { display: inline-flex; align-items: baseline; gap: 7px; margin-top: 20px; font-family: var(--font-body); font-size: var(--fs-link); color: var(--ink); padding-bottom: 3px; }
 /* Paper note: a one-line contribution / status remark under the abstract. .paper__abstract is a flex row,
    so the note takes a full-width basis to sit beneath the abstract span; selectors are nested to outrank
@@ -354,7 +372,6 @@ a { color: inherit; text-decoration: none; }
   flex-basis: 100%; margin: 10px 0 0;
   font-family: var(--font-label); font-weight: 400; font-size: var(--fs-meta);
   letter-spacing: .04em; line-height: 1.55; color: var(--sub);
-  max-width: var(--measure-prose);
 }
 .paper .paper__abstract .paper__note::before { content: "\2014\00a0"; color: var(--accent); }  /* em dash + nbsp */
 /* Row of links under a paper (workshop page + arXiv); the wrapper carries the top margin. */
@@ -367,6 +384,11 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 820px) {
   .hero { flex-direction: column-reverse; align-items: stretch; gap: clamp(24px, 6vh, 40px); }
   .portrait { width: clamp(150px, 42vw, 200px); aspect-ratio: 1 / 1; }
+  /* Languages: the note spans the full card width beneath the icon + name row, instead of
+     leaving a dead column under the icon. */
+  .lang { display: grid; grid-template-columns: auto 1fr; gap: 0 14px; }
+  .lang > div { display: contents; }
+  .lang__note { grid-column: 1 / -1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
