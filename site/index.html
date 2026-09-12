@@ -3,8 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Zerui Chen - About me</title>
-  <meta name="description" content="Zerui Chen — theoretical foundations of deep-learning architecture." />
+  <title>Zerui Chen</title>
+  <meta name="description" content="Zerui Chen — final-year CS at Cambridge. LLM-driven automated discovery: how search systems find solutions, where they go wrong, and how to fix them." />
+  <meta property="og:title" content="Zerui Chen" />
+  <meta property="og:description" content="Final-year CS at Cambridge. LLM-driven automated discovery; Sequence-modeling" />
+  <meta property="og:image" content="https://zeruic.me/assets/portrait/portrait-1x1-640.jpg" />
+  <meta property="og:url" content="https://zeruic.me/" />
+  <meta name="twitter:card" content="summary" />
 
   <!-- Restore saved theme before paint (avoids a flash); expose the toggle. -->
   <script>
@@ -39,6 +44,8 @@
           <a class="nav__link" href="#research">Research</a>
           <a class="nav__link" href="#projects">Projects</a>
           <a class="nav__link" href="#languages">Prog Langs</a>
+          <!-- TODO: when the first technical note exists (target: by December), add
+               <a class="nav__link" href="#notes">Notes</a>  and the matching 04 — Notes section below. -->
         </nav>
         <button class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle theme — Terminal / Rust"></button>
       </div>
@@ -46,15 +53,40 @@
 
     <section class="hero">
       <div class="hero__text">
-        <p class="eyebrow">AI Scientist · SWE Hobbyist</p>
+        <p class="eyebrow">CS Cambridge · Researcher · Software</p>
         <h1 class="name">Zerui Chen</h1>
-        <p class="bio">I currently work on the theoretical foundations of deep-learning architecture — theory first, validated by experiment.
-          My interests span machine learning and AI broadly, from the intricacies of DL/RL to the design of autonomous systems, all in service of one question.</p>
-        <p class="question">What is <span class="accent">intelligence</span>? How do we create it — and is human intelligence the only kind?</p>
+        <p class="bio">
+            Final-year CS at Cambridge. I work on LLM-driven automated discovery; how search systems find solutions, where they go wrong,
+            and how to identify and address their gaps. Also experienced in sequence-model architectures and optimization.
+        </p>
+        <p class="question">Can we build systems that <span class="accent">discover</span> — and understand them well enough to trust what they find?</p>
+        <p class="now"><b>Now</b> · Sep 2026 — Quant research intern at WorldQuant, interday equity forecasting · building Calculemus, an epistemic runtime for research agents</p>
       </div>
 
       <figure class="portrait" aria-label="Portrait of Zerui Chen">
-        <img src="assets/portrait.png" alt="Zerui Chen" />
+        <picture>
+          <!-- Mobile (<=820px): the slot is 1:1, so serve a square crop framed on the face. -->
+          <source media="(max-width: 820px)" type="image/avif"
+                  srcset="assets/portrait/portrait-1x1-320.avif 320w, assets/portrait/portrait-1x1-480.avif 480w, assets/portrait/portrait-1x1-640.avif 640w"
+                  sizes="(min-width: 476px) 200px, (min-width: 357px) 42vw, 150px" />
+          <source media="(max-width: 820px)" type="image/webp"
+                  srcset="assets/portrait/portrait-1x1-320.webp 320w, assets/portrait/portrait-1x1-480.webp 480w, assets/portrait/portrait-1x1-640.webp 640w"
+                  sizes="(min-width: 476px) 200px, (min-width: 357px) 42vw, 150px" />
+          <source media="(max-width: 820px)"
+                  srcset="assets/portrait/portrait-1x1-320.jpg 320w, assets/portrait/portrait-1x1-480.jpg 480w, assets/portrait/portrait-1x1-640.jpg 640w"
+                  sizes="(min-width: 476px) 200px, (min-width: 357px) 42vw, 150px" />
+          <!-- Desktop: 3:4 slot, clamp(220px, 26vw, 340px). -->
+          <source type="image/avif"
+                  srcset="assets/portrait/portrait-3x4-480.avif 480w, assets/portrait/portrait-3x4-720.avif 720w, assets/portrait/portrait-3x4-1080.avif 1080w"
+                  sizes="(min-width: 1308px) 340px, (min-width: 846px) 26vw, 220px" />
+          <source type="image/webp"
+                  srcset="assets/portrait/portrait-3x4-480.webp 480w, assets/portrait/portrait-3x4-720.webp 720w, assets/portrait/portrait-3x4-1080.webp 1080w"
+                  sizes="(min-width: 1308px) 340px, (min-width: 846px) 26vw, 220px" />
+          <img src="assets/portrait/portrait-3x4-720.jpg"
+               srcset="assets/portrait/portrait-3x4-480.jpg 480w, assets/portrait/portrait-3x4-720.jpg 720w, assets/portrait/portrait-3x4-1080.jpg 1080w"
+               sizes="(min-width: 1308px) 340px, (min-width: 846px) 26vw, 220px"
+               width="1052" height="1402" alt="Zerui Chen" fetchpriority="high" decoding="async" />
+        </picture>
         <span class="portrait__label"></span>
       </figure>
     </section>
@@ -83,18 +115,41 @@
           <span class="section__num">01 — Research</span>
           <span class="section__rule" aria-hidden="true"></span>
         </div>
-        <p class="section__intro">Work I've had a hand in.</p>
-
+        
+        <p class="section__intro">Papers I've had a hand in, newest first.</p>
         <article class="paper">
-          <span class="paper__kicker">AID-Wild Workshop @ ACM CAIS 2026 · May 2026</span>
+          <span class="paper__kicker">Under review · NeurIPS 2026 workshops · Sep 2026</span>
+          <h3 class="paper__title">Search Pathology Diagnosis for Automated Discovery</h3>
+          <div class="paper__meta">
+            <span>Alistair Cheong* · Zerui Chen* <span class="paper__eq">(*equal contribution)</span></span>
+          </div>
+          <div class="paper__abstract">
+            <span>Automated discovery systems are usually compared on the score of their best artifact, which says little about the search that produced it.
+                We introduce the provenance hypergraph, a system-agnostic abstraction of a search trace, and detectors for two pathologies on it:
+                redundant rediscovery (an exploration failure) and poorly grounded next steps (an exploitation failure), selected on five released meta-evaluation datasets.
+                Applied to our open re-implementation of TTT-Discover on the Erdős minimum-overlap problem, the readings guided a memory intervention
+                that reached the baseline's final score with 28% fewer solutions, and diagnosed why a second intervention failed.</span>
+            <span class="paper__note">To be released as ADSInspector, an ADS-agnostic Python package, after notification.</span>
+          </div>
+          <a class="paper__link" href="https://github.com/cheongalc/nanodiscover" target="_blank" rel="noopener">nanodiscover (case-study system)<span class="link__arrow">↗</span></a>
+        </article>
+
+        <article class="paper" style="margin-top: ">
+          <span class="paper__kicker">Oral · AID-Wild Workshop @ ACM CAIS 2026 · May 2026</span>
           <h3 class="paper__title">Evolution Fine-Tuning: Learning to Discover Across 371 Optimization Tasks</h3>
           <div class="paper__meta">
             <span>Young-Jun Lee · Seungone Kim · Minki Kang · Alistair Cheong · Zerui Chen · Seungho Han · Taehee Jung · Dongyeop Kang</span>
           </div>
           <div class="paper__abstract">
-            <span>We introduce Evolution Fine-Tuning (EFT), a framework that fine-tunes LLMs on a large-scale collection of evolutionary trajectories drawn from search-based scaffolds.</span>
+            <span>EFT is a mid-training paradigm that teaches LLMs to evolve solutions across tasks by converting evolutionary-search trajectories into supervision:
+                a 156K-trajectory dataset over 371 tasks in 10 domains, with fine-tuned 2B–9B models gaining +10.2% on average across 22 held-out tasks and,
+                paired with test-time RL, matching state-of-the-art on two circle-packing tasks.</span>
+            <span class="paper__note">My part: nanodiscover was the test-time-RL scaffold behind the test-time-RL results.</span>
           </div>
-          <a class="paper__link" href="https://openreview.net/forum?id=UJpQBUIqON" target="_blank" rel="noopener">View on OpenReview<span class="link__arrow">↗</span></a>
+          <div class="paper__links">
+            <a class="paper__link" href="https://ai-discovery-in-the-wild.github.io/papers.html" target="_blank" rel="noopener">Workshop page · Featured Orals<span class="link__arrow">↗</span></a>
+            <a class="paper__link" href="https://arxiv.org/abs/2606.29082" target="_blank" rel="noopener">arXiv:2606.29082<span class="link__arrow">↗</span></a>
+          </div>
         </article>
       </section>
 
@@ -112,15 +167,26 @@
               <a class="project__title" href="https://github.com/cheongalc/nanodiscover" target="_blank" rel="noopener">nanodiscover<span class="link__arrow">↗</span></a>
               <span class="project__tech">Ray+vLLM · DeepSpeed · Slurm · AWS</span>
             </div>
-            <p class="project__desc">A clean reimplementation of <a class="ilink" href="https://arxiv.org/abs/2601.16175" target="_blank" rel="noopener">TTT-Discover</a>, a <b>SOTA test-time-learning automated discovery system</b> (online RL over a quality-diversity archive). Adopted as the test-time-RL scaffold in <a class="ilink" href="https://openreview.net/forum?id=UJpQBUIqON" target="_blank" rel="noopener">Evolution Fine-Tuning</a> (coauthored; AID-Wild Workshop @ ACM CAIS 2026). Ongoing research building on it to systematically analyze ADS failure modes and propose targeted interventions for search efficiency &amp; effectiveness, deployed on HPC clusters.</p>
+            <p class="project__desc">
+                An open re-implementation of <a class="ilink" href="https://arxiv.org/abs/2601.16175" target="_blank" rel="noopener">TTT-Discover</a>,
+                a <b>state-of-the-art test-time-learning discovery system</b> (evolutionary search with an LLM proposer that the reference system trains online).
+                Replaces the Tinker API dependency (~$500 per problem) with local vLLM/DeepSpeed/Ray inference and training, fixes upstream bugs, and reproduces the published results up to sampling stochasticity.
+                Adopted as the test-time-RL scaffold in <a class="ilink" href="https://arxiv.org/abs/2606.29082" target="_blank" rel="noopener">Evolution Fine-Tuning</a>
+                (co-authored; Oral, AID-Wild @ ACM CAIS 2026) and the case-study system in our search-pathology paper.</p>
           </div>
 
+          <!-- TODO (Calculemus): add only once the evaluator runs and the repo is public-->
           <div class="project">
             <div class="project__top">
               <a class="project__title" href="https://github.com/Zerui18/zlab" target="_blank" rel="noopener">zlab<span class="link__arrow">↗</span></a>
               <span class="project__tech">PyTorch · Lightning · Pandas</span>
             </div>
-            <p class="project__desc">A <b>modular deep learning research platform</b> for rapid experimentation with transformer architectures, enabling systematic ablation studies across attention mechanisms, positional encodings, and training configurations via a registry-driven composition system. Designed for seq2seq tasks (machine translation, speech-to-text) with built-in experiment management for grid search and metric-tracked evaluation.</p>
+            <p class="project__desc">
+                A <b>modular deep learning research platform</b> for rapid experimentation with transformer architectures,
+                enabling systematic ablation studies across attention mechanisms, positional encodings, and training configurations
+                via a registry-driven composition system. Designed for seq2seq tasks (machine translation, speech-to-text) with
+                built-in experiment management for grid search and metric-tracked evaluation.
+            </p>
           </div>
 
           <div class="project">
@@ -132,7 +198,9 @@
               </span>
               <span class="project__tech">UIKit · SwiftUI · CoreData · Cydia Substrate</span>
             </div>
-            <p class="project__desc">An iOS <b>jailbroken tweak, app, and cli</b> to play videos as wallpaper on lock &amp; home screens. Performance optimized &amp; video catalogue built-in. Checkout the release posts on Reddit to see it in action:
+            <p class="project__desc">
+                An iOS <b>jailbroken tweak, app, and cli</b> to play videos as wallpaper on lock &amp; home screens. Performance optimized &amp; 
+                video catalogue built-in. Checkout the release posts on Reddit to see it in action:
                 <a class="ilink" href="https://www.reddit.com/r/jailbreak/comments/fevsma/upcoming_frame_20_bring_your_idevice_to_life_with/" target="_blank" rel="noopener">V2</a> ·
                 <a class="ilink" href="https://www.reddit.com/r/jailbreak/comments/u4mszv/update_frame_30_modern_video_wallpaper_hub_for/" target="_blank" rel="noopener">V3</a>
             </p>
@@ -143,7 +211,10 @@
               <a class="project__title" href="https://github.com/Zerui18/MML-Book" target="_blank" rel="noopener">MML Book<span class="link__arrow">↗</span></a>
               <span class="project__tech">NumPy · SymPy · Matplotlib · LaTeX</span>
             </div>
-            <p class="project__desc">Typesetting the full solutions to <a class="ilink" href="https://mml-book.github.io" target="_blank" rel="noopener"><b>Mathematics for Machine Learning</b></a>, implementing with basic NumPy ops the core linear algebra, regression and bayesian inference algorithms.</p>
+            <p class="project__desc">
+                Typesetting the full solutions to <a class="ilink" href="https://mml-book.github.io" target="_blank" rel="noopener"><b>Mathematics for Machine Learning</b></a>,
+                implementing with basic NumPy ops the core linear algebra, regression and bayesian inference algorithms.
+            </p>
           </div>
         </div>
       </section>
@@ -159,39 +230,83 @@
         <div class="langs">
           <div class="lang">
             <i class="devicon-python-plain lang__icon" aria-hidden="true"></i>
-            <div><div class="lang__name">Python</div><div class="lang__note">My everyday go-to — versatile and unfussy, the first thing I reach for, from a quick script to a research run.</div></div>
+            <div><div class="lang__name">Python</div><div class="lang__note">
+                My <b>everyday workhorse</b> for research runs and scripting. I enjoy the freedom of its extreme dynamism until my function preconditions
+                take more than half of the function, and that borrowed freedom is revealed to be a debt I repay by hand.
+            </div></div>
           </div>
           <div class="lang">
             <i class="devicon-swift-plain lang__icon" aria-hidden="true"></i>
-            <div><div class="lang__name">Swift</div><div class="lang__note"><b>The first language I ever learned</b> — six-plus years of iOS apps. I build fewer now, but it's the good old friend I started with.</div></div>
+            <div><div class="lang__name">Swift</div><div class="lang__note">
+                <b>My first language, on my first MacBook!</b> A decade of building iOS apps. Its syntax, type system and semantics used to be
+                elegant and powerful like the phone it runs on. Then it started trying to be every language at once.
+            </div></div>
+          </div>
+          <div class="lang">
+            <i class="devicon-objectivec-plain lang__icon" aria-hidden="true"></i>
+            <div><div class="lang__name">Objective-C</div><div class="lang__note">
+                Feels like a preprocessor + runtime bolted onto C. Works as a bridge from Swift into the C-world now, but <b>it handed jailbreak tweak developers
+                the lifeline</b>: dynamic message dispatch, runtime classes and methods one can edit at will, and binaries that can be dumped into readable headers.
+            </div></div>
           </div>
           <div class="lang">
             <i class="devicon-typescript-plain lang__icon" aria-hidden="true"></i>
-            <div><div class="lang__name">TypeScript</div><div class="lang__note">My way onto the web — what I lean on for every site and front-end I build.</div></div>
+            <div><div class="lang__name">TypeScript</div><div class="lang__note">
+                My way onto the web, being able to do arithmetic on types was my new favourite superpower for a while (wdym <b>the type system is turing-complete?!</b>
+                someone wrote a type checker in it).
+            </div></div>
           </div>
           <div class="lang">
             <i class="devicon-cplusplus-plain lang__icon" aria-hidden="true"></i>
-            <div><div class="lang__name">C++</div><div class="lang__note">For the heavy, low-level work when I need it — powerful, though its syntax and I have never quite gotten along.</div></div>
+            <div><div class="lang__name">C++</div><div class="lang__note">
+                The language and its std lib have the <b>most obscure semantics</b> of any language I know. Wdym <code>std::move</code> doesn't move anything?
+                <code>enable_if</code> promoted a SFINAE hack into the std lib, until Concepts finally gave template constraints a real place in the language.
+                I'll never know all of it, and that's chill.
+            </div></div>
           </div>
           <div class="lang">
             <i class="devicon-rust-original lang__icon" aria-hidden="true"></i>
-            <div><div class="lang__name">Rust</div><div class="lang__note">The new one — learned properly, ground-up from the reference, and so far I'm sold. Likely my driver for what's next.</div></div>
+            <div><div class="lang__name">Rust</div><div class="lang__note">
+                The latest language I've learnt, from the Book. For the first time <b>ownership and moves</b> made complete sense, and aliasing-xor-mutability made
+                every violation visible at compile time. It also has just the right slice of modern ergonomics in its syntax and std lib to be a pleasure to write.
+            </div></div>
           </div>
           <div class="lang">
             <i class="devicon-java-plain lang__icon" aria-hidden="true"></i>
-            <div><div class="lang__name">Java</div><div class="lang__note">Old reliable — where a lot of the fundamentals first clicked for me.</div></div>
+            <div><div class="lang__name">Java</div><div class="lang__note">
+                A timeless classic that I learnt in Tripos and have yet to justify using it over the others for any project. The JVM is the best runtime I never get to use.
+            </div></div>
           </div>
           <div class="lang">
             <i class="devicon-ocaml-plain lang__icon" aria-hidden="true"></i>
-            <div><div class="lang__name">OCaml</div><div class="lang__note">Met it in a Cambridge Tripos course — a fresh, almost mathematical take on programming, even if I've yet to use it outside school.</div></div>
+            <div><div class="lang__name">OCaml</div><div class="lang__note">
+                Learnt it during Tripos too. Broke my mind at first, but I grew to <b>love the elegance of functional programming</b>: it's almost mathematical
+                yet still practical. Its Hindley–Milner type inference feels like an oracle, and code generality comes free rather than painstakingly declared.
+            </div></div>
           </div>
           <div class="lang">
             <i class="devicon-latex-plain lang__icon" aria-hidden="true"></i>
-            <div><div class="lang__name">LaTeX</div><div class="lang__note">Always for typesetting — verbose and fiddly, but until something better catches on, it's what makes papers look right.</div></div>
+            <div><div class="lang__name">LaTeX</div><div class="lang__note">
+                What I type the most nowadays, after Python. For writing papers and notes, or interpreting the unrendered math blocks in agents' responses.
+            </div></div>
           </div>
         </div>
       </section>
 
+      <!-- TODO (notes section, placeholder until the first post exists):
+      <section id="notes" class="section">
+        <div class="section__head">
+          <span class="section__num">03 — Notes</span>
+          <span class="section__rule" aria-hidden="true"></span>
+        </div>
+        <p class="section__intro">Occasional technical writing.</p>
+        <article class="note">
+          <span class="paper__kicker">Dec 2026</span>
+          <h3 class="paper__title"><a class="ilink" href="notes/erdos-provenance.html">What the provenance hypergraph showed on Erdős</a></h3>
+          <p class="project__desc">Reading a 25,000-solution search trace: where the rediscoveries were, how far back they reached, and why the to-do-list intervention copied its parents.</p>
+        </article>
+      </section>
+      -->
     </div>
   </div>
 </body>
