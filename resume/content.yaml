@@ -1,0 +1,108 @@
+# ---------------------------------------------------------------------------
+# Zerui Chen — resume content. Layout lives in resume.typ. (Named content.yaml, not resume.yaml, so editors do not apply the JSON Resume schema to it.)
+# Text is Typst markup: *bold*, _italic_, #link("url")[text].
+# Optional `variants: [research]` or `[quant]` on any entry/bullet restricts it to that variant. Omit = both.
+# ---------------------------------------------------------------------------
+name: Zerui Chen
+name_zh: 陈泽瑞
+contact:
+  - { text: "zerui2112@gmail.com", url: "mailto:zerui2112@gmail.com" }
+  - { text: "Github: Zerui18", url: "https://github.com/Zerui18" }
+  - { text: "LinkedIn: zerui-chen-241015204", url: "https://www.linkedin.com/in/zerui-chen-241015204/" }
+  - { text: "My Page: zeruic.me", url: "https://zeruic.me" }
+
+availability:
+  research: "Graduating Jul 2027 · seeking research engineer / fellowship roles from summer 2027"
+  quant: "Graduating Jul 2027 · full-time from summer 2027"
+
+# Section order per variant. Keys refer to the blocks below.
+order:
+  research: [education, publications, experience, skills]
+  quant: [education, experience, publications, skills]
+
+education:
+  title: Education
+  entries:
+    - org: University of Cambridge
+      role: BA (Hons) Computer Science
+      location: Cambridge, UK
+      dates: Expected Jul 2027
+      bullets:
+        - text: "*Key Coursework:* Artificial Intelligence, Advanced Data Science, Bayesian Inference, Deep Neural Networks, Natural Language Processing, Geometric Deep Learning, Reinforcement Learning (expected by graduation)"
+        - text: "*Year 2 Grading: First Class* - course rank *18 / 129*"
+    - org: Hwa Chong Institution
+      role: "GCE A-Levels: 4 H2 *AAAA/AA*, H3 *Distinction*"
+      location: Singapore
+      dates: Jan 2016 - Dec 2021
+
+publications:
+  title: Publications & Research
+  entries:
+    - org: "Search Pathology Diagnosis for Automated Discovery"
+      authors: "*Co-first author*"
+      venue: "Under review, NeurIPS 2026 workshops"
+      dates: Sep 2026
+      bullets:
+        - text: "Built a *system-agnostic* toolkit to detect *2 types of search pathologies* in automated discovery systems (ADS), based on a unified intermediate representation of traces and a bias-robust protocol to tune and evaluate the detectors."
+        - text: "Demonstrated the detectors through a case study on a *SOTA ADS*, yielding *28% improvement in sampling efficiency*."
+    - org: "#link(\"https://ai-discovery-in-the-wild.github.io/papers.html\")[Evolution Fine-Tuning: Learning to Discover Across 371 Optimization Tasks]"
+      authors: "Co-author"
+      venue: "*Oral*, AID-Wild Workshop @ ACM CAIS 2026 · #link(\"https://arxiv.org/abs/2606.29082\")[arXiv:2606.29082]"
+      dates: May 2026
+      bullets:
+        - text: "Contributed *nanodiscover* as the *test-time-RL scaffold* behind the paper's test-time-RL results."
+    - org: "#link(\"https://github.com/cheongalc/nanodiscover\")[nanodiscover]"
+      authors: "Co-author"
+      venue: "Open-source research software"
+      dates: "2026"
+      bullets:
+        - text: "A clean reimplementation of #link(\"https://arxiv.org/abs/2601.16175\")[TTT-Discover], a *SOTA test-time-learning automated discovery system*, replacing its Tinker API dependency (≈\\$500 per problem) with local vLLM/DeepSpeed/Ray inference and training. Fixes upstream bugs, reproduces the published results up to sampling stochasticity, and was adopted by Evolution Fine-Tuning."
+    - org: "Comparative study of decision trees vs deep learning models for atrial tachycardia diagnosis"
+      authors: "*First author*"
+      venue: "#link(\"https://arxiv.org/abs/2206.07515\")[arXiv:2206.07515]"
+      dates: Jun 2022
+
+experience:
+  title: Professional Experience
+  entries:
+    - org: WorldQuant
+      role: Quantitative Research Intern
+      location: Singapore
+      dates: Jul 2026 - Sep 2026
+      bullets:
+        - text: "Designed and built a *tiered forecast-evaluation suite* for residualized return forecasts: *headline metrics* spanning accuracy, calibration and a *PnL proxy*, complemented by *diagnostics* for calibration shape, tail effects and realisation dynamics, with *robust inference* throughout via HAC standard errors and simultaneous confidence bands."
+        - text: "Merged into prod. Now focused on improving modelling accuracy with feature engineering and augmented objectives."
+    - org: ByteDance, Global E-Commerce
+      role: Machine Learning Engineer Intern
+      location: Singapore
+      dates: Jul 2025 - Sep 2025
+      bullets:
+        - text: "Researched and shipped novel and robust *auxiliary objectives* and *model architectural* optimizations for TikTok Global Shop's fine-ranking DL model, trained on in-house *HPC* clusters, achieving *+0.3% revenue lift*."
+        - text: "Built internal tools for interactive model architecture *visualization* and automated *training behavior analysis*."
+    - org: "[Competition] NUS Medical Grand Challenge"
+      role: Full-Stack & LLM Developer
+      location: Global
+      dates: Feb 2024 - Aug 2024
+      bullets:
+        - text: "Founded medical-AI startup _Tomy_ for remote stoma care and emerged *Grand Champion* amongst 40 teams from universities across Asia, partnering with *5 Singapore public hospitals* with deployed clinical trials."
+        - text: "Implemented and deployed image classification API using few-shot prompted vision language model, achieving *100% recall* and *80% precision* in 4-fold cross-validation with extremely scarce training data."
+    - org: Singapore Armed Forces
+      role: Signals & Admin Specialist
+      location: Singapore
+      dates: Jan 2022 - Nov 2023
+      bullets:
+        - text: "Developed duty assignment algorithm with availability constraints, saving hours monthly and improving fairness."
+    - org: Agency for Science, Technology and Research
+      role: Bio-AI Research Intern
+      location: Singapore
+      dates: Jun 2020 - May 2021
+      bullets:
+        - text: "Developed a LSTM-CNN deep learning model for atrial tachycardia diagnosis, reaching SOTA-comparable 81% accuracy while being highly data-efficient; parallelized data ETL pipeline to achieve *100× throughput*."
+
+skills:
+  title: Technical Skills
+  bullets:
+    - text: "*Machine Learning* with #underline[Python] using PyTorch, vLLM, DeepSpeed, Ray, LightGBM for LLM inference and fine-tuning and deep learning for NLP, CV, RecSys, with Lightning, Slurm and AWS for experiment orchestration."
+    - text: "*Data ETL & Analysis* with #underline[SQL], MongoDB, NumPy, Pandas, Matplotlib"
+    - text: "*General Development* with #underline[C++], #underline[Java], #underline[OCaml], #underline[Rust], #underline[TypeScript], #underline[Swift]"
+    - text: "*Languages:* English (native), Mandarin Chinese (native)."
