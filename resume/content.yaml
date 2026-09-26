@@ -47,7 +47,7 @@ publications:
         - text: "Demonstrated the detectors through a case study on a *SOTA ADS*, yielding *28% improvement in sampling efficiency*."
     - org: "#link(\"https://ai-discovery-in-the-wild.github.io/papers.html\")[Evolution Fine-Tuning: Learning to Discover Across 371 Optimization Tasks]"
       authors: "Co-author"
-      venue: "*Oral*, AID-Wild Workshop @ ACM CAIS 2026 · #link(\"https://arxiv.org/abs/2606.29082\")[arXiv:2606.29082]"
+      venue: "*NeurIPS 2026* (poster) · *Oral*, AID-Wild Workshop @ ACM CAIS 2026 · #link(\"https://arxiv.org/abs/2606.29082\")[arXiv:2606.29082]"
       dates: May 2026
       bullets:
         - text: "Contributed *nanodiscover* as the *test-time-RL scaffold* behind the paper's test-time-RL results."

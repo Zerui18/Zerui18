@@ -57,7 +57,8 @@
             My part: nanodiscover was the test-time-RL scaffold behind the test-time-RL results.
         </td>
         <td>
-            Oral · <a href="https://ai-discovery-in-the-wild.github.io/papers.html">AID-Wild Workshop @ ACM CAIS 2026</a> · May 2026
+            NeurIPS 2026 (poster) · Sep 2026
+            <br/><sub>earlier: Oral · <a href="https://ai-discovery-in-the-wild.github.io/papers.html">AID-Wild Workshop @ ACM CAIS 2026</a> · May 2026</sub>
         </td>
     </tr>
 </table>
@@ -120,7 +121,7 @@
             (evolutionary search with an LLM proposer that the reference system trains online). Replaces the Tinker API dependency (~$500 per problem)
             with local vLLM/DeepSpeed/Ray inference and training, fixes upstream bugs, and reproduces the published results up to sampling stochasticity.
             Adopted as the test-time-RL scaffold in <a href="https://arxiv.org/abs/2606.29082">Evolution Fine-Tuning</a>
-            (co-authored, Oral at AID-Wild @ ACM CAIS 2026) and the case-study system in our search-pathology paper.
+            (co-authored, NeurIPS 2026) and the case-study system in our search-pathology paper.
         </td>
         <td>
             <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" height="30px" alt="python"/>
