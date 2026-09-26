@@ -2,18 +2,25 @@
 # Zerui Chen — resume content. Layout lives in resume.typ. (Named content.yaml, not resume.yaml, so editors do not apply the JSON Resume schema to it.)
 # Text is Typst markup: *bold*, _italic_, #link("url")[text].
 # Optional `variants: [research]` or `[quant]` on any entry/bullet restricts it to that variant. Omit = both.
+# Optional `grad: "2027"` or `"2028"` on an entry/bullet/contact restricts it to that graduation year (2028 = integrated master's). Omit = both.
+# Any org/role/location/dates string may instead be a map keyed by graduation year, e.g. dates: { "2027": "...", "2028": "..." }.
 # ---------------------------------------------------------------------------
 name: Zerui Chen
 name_zh: 陈泽瑞
 contact:
-  - { text: "zerui2112@gmail.com", url: "mailto:zerui2112@gmail.com" }
+  - { text: "zerui2112@gmail.com", url: "mailto:zerui2112@gmail.com", grad: "2027" }
+  - { text: "hi@zeruic.me", url: "mailto:hi@zeruic.me", grad: "2028" }
   - { text: "Github: Zerui18", url: "https://github.com/Zerui18" }
   - { text: "LinkedIn: zerui-chen-241015204", url: "https://www.linkedin.com/in/zerui-chen-241015204/" }
   - { text: "My Page: zeruic.me", url: "https://zeruic.me" }
 
 availability:
-  research: "Graduating Jul 2027 · seeking research engineer / fellowship roles from summer 2027"
-  quant: "Graduating Jul 2027 · full-time from summer 2027"
+  "2027":
+    research: "Graduating Jul 2027 · seeking research engineer / fellowship roles from summer 2027"
+    quant: "Graduating Jul 2027 · full-time from summer 2027"
+  "2028":
+    research: "Graduating Jul 2028 · seeking research engineer / fellowship roles from summer 2028"
+    quant: "Graduating Jul 2028 · full-time from summer 2028"
 
 # Section order per variant. Keys refer to the blocks below.
 order:
@@ -24,9 +31,9 @@ education:
   title: Education
   entries:
     - org: University of Cambridge
-      role: BA (Hons) Computer Science
+      role: { "2027": "BA (Hons) Computer Science", "2028": "BA (Hons) & MEng Computer Science" }
       location: Cambridge, UK
-      dates: Expected Jul 2027
+      dates: { "2027": "Expected Jul 2027", "2028": "Expected Jul 2028" }
       bullets:
         - text: "*Key Coursework:* Artificial Intelligence, Advanced Data Science, Bayesian Inference, Deep Neural Networks, Natural Language Processing, Geometric Deep Learning, Reinforcement Learning (expected by graduation)"
         - text: "*Year 2 Grading: First Class* - course rank *18 / 129*"

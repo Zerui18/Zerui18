@@ -1,8 +1,10 @@
 // Zerui Chen — resume layout. Content lives in content.yaml.
 // Build:  typst compile --input variant=research resume.typ out/zerui-chen-research.pdf
 //         typst compile --input variant=quant    resume.typ out/zerui-chen-quant.pdf
+//         add --input grad=2028 for the integrated-master's variants (default grad=2027). See build.sh.
 
 #let variant = sys.inputs.at("variant", default: "research")
+#let grad = sys.inputs.at("grad", default: "2027")
 #let data = yaml("content.yaml")
 
 // ---- page & type (matches the Pages original: A4, Times, 1 cm side margins) ----
@@ -22,8 +24,14 @@
 
 // ---- helpers ----
 #let m(s) = eval(s, mode: "markup")            // YAML string -> Typst markup
-#let on(item) = {                                // is this item in the current variant?
-  if type(item) == dictionary and "variants" in item { variant in item.variants } else { true }
+#let on(item) = {                                // is this item in the current variant and graduation year?
+  if type(item) != dictionary { return true }
+  let v = if "variants" in item { variant in item.variants } else { true }
+  let g = if "grad" in item { item.grad == grad } else { true }
+  v and g
+}
+#let pick(x) = {                                 // a field may be a map keyed by graduation year
+  if type(x) == dictionary and grad in x { x.at(grad) } else { x }
 }
 #let heading-rule(title) = {
   v(heading-gap)
@@ -42,13 +50,13 @@
 }
 #let entry(e) = {
   let head = if "authors" in e {
-    [#text(weight: "bold", m(e.org))]
+    [#text(weight: "bold", m(pick(e.org)))]
   } else {
-    [#text(weight: "bold", m(e.org)) | #m(e.role) | #emph(m(e.location))]
+    [#text(weight: "bold", m(pick(e.org))) | #m(pick(e.role)) | #emph(m(pick(e.location)))]
   }
   block(above: entry-gap, below: 0.4em)[
     #grid(columns: (1fr, auto), column-gutter: 1em, align: (left, right),
-      head, [#text(weight: "bold", m(e.dates))],
+      head, [#text(weight: "bold", m(pick(e.dates)))],
     )
     #if "authors" in e [
       #v(0.15em) #m(e.authors) #if "venue" in e [ #h(0.4em)|#h(0.4em) #emph(m(e.venue)) ]
@@ -67,8 +75,8 @@
 // ---- header ----
 #align(center)[
   #block(below: 0.7em)[#text(size: 30pt, data.name) #text(size: 30pt)[ | ] #text(size: 26pt, cjk(data.name_zh))]
-  #block(below: 0.25em)[#text(size: 11pt, data.contact.map(c => link(c.url, c.text)).join(" | "))]
-  #text(size: 11pt, style: "italic", data.availability.at(variant))
+  #block(below: 0.25em)[#text(size: 11pt, data.contact.filter(on).map(c => link(c.url, c.text)).join(" | "))]
+  #text(size: 11pt, style: "italic", data.availability.at(grad).at(variant))
 ]
 
 // ---- body ----
