@@ -47,8 +47,8 @@ publications:
   entries:
     - org: "Search Pathology Diagnosis for Automated Discovery"
       authors: "*Co-first author*"
-      venue: "Under review, NeurIPS 2026 workshops"
-      dates: Sep 2026
+      venue: "*NeurIPS 2026* workshops (posters): New in ML · Interpreting Agent Behavior (IAB)"
+      dates: Oct 2026
       bullets:
         - text: "Built a *system-agnostic* toolkit to detect *2 types of search pathologies* in automated discovery systems (ADS), based on a unified intermediate representation of traces and a bias-robust protocol to tune and evaluate the detectors."
         - text: "Demonstrated the detectors through a case study on a *SOTA ADS*, yielding *28% improvement in sampling efficiency*."

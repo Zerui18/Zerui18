@@ -37,11 +37,12 @@
             redundant rediscovery (an exploration failure) and poorly grounded next steps (an exploitation failure), selected on five released meta-evaluation datasets.
             Applied to our open re-implementation of TTT-Discover on the Erdős minimum-overlap problem, the readings guided a memory intervention
             that reached the baseline's final score with 28% fewer solutions, and diagnosed why a second intervention failed.
-            To be released as ADSInspector, an ADS-agnostic Python package, after notification.
+            To be released as ADSInspector, an ADS-agnostic Python package.
             Case-study system: <a href="https://github.com/cheongalc/nanodiscover">nanodiscover</a>.
         </td>
         <td>
-            Under review · NeurIPS 2026 workshops · Sep 2026
+            NeurIPS 2026 workshops (posters) · Oct 2026
+            <br/><sub>New in ML · Interpreting Agent Behavior (IAB)</sub>
         </td>
     </tr>
     <!-- Evolution Fine-Tuning -->
