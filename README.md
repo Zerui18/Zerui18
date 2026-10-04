@@ -42,7 +42,7 @@
         </td>
         <td>
             NeurIPS 2026 workshops (posters) · Oct 2026
-            <br/><sub>New in ML · Interpreting Agent Behavior (IAB)</sub>
+            <br/><sub>New in ML · Interpreting Agent Behavior (IAB) · MetaAgents</sub>
         </td>
     </tr>
     <!-- Evolution Fine-Tuning -->

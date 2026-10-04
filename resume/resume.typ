@@ -9,7 +9,7 @@
 
 // ---- page & type (matches the Pages original: A4, Times, 1 cm side margins) ----
 #set page(paper: "a4", margin: (left: 1cm, right: 0.9cm, top: 0.45cm, bottom: 0.6cm))
-#set text(font: ("Times New Roman", "Liberation Serif"), size: 11pt, lang: "en")
+#set text(font: "Times New Roman", size: 11pt, lang: "en")
 
 // ---- vertical rhythm (tune these to fill the page) ----
 #let leading = 0.55em      // between wrapped lines of one paragraph / bullet
@@ -20,7 +20,7 @@
 
 #set par(leading: leading, spacing: 0.45em, justify: false)
 #show link: it => underline(text(fill: black, it))   // links are black and underlined, as in the Pages original
-#let cjk(body) = text(font: ("STSongti-SC-Regular", "Songti SC", "Noto Serif CJK SC", "Noto Sans CJK SC"), body)
+#let cjk(body) = text(font: "Songti SC", body)
 
 // ---- helpers ----
 #let m(s) = eval(s, mode: "markup")            // YAML string -> Typst markup
