@@ -74,7 +74,7 @@
 
 // ---- header ----
 #align(center)[
-  #block(below: 0.7em)[#text(size: 30pt, data.name) #text(size: 30pt)[ | ] #text(size: 26pt, cjk(data.name_zh))]
+  #block(below: 0.7em)[#text(size: 30pt, data.name)#text(size: 30pt)[#h(0.3em)|#h(0.3em)]#text(size: 26pt, cjk(data.name_zh))]
   #block(below: 0.25em)[#text(size: 11pt, data.contact.filter(on).map(c => link(c.url, c.text)).join(" | "))]
   #text(size: 11pt, style: "italic", data.availability.at(grad).at(variant))
 ]

@@ -8,8 +8,7 @@
 name: Zerui Chen
 name_zh: 陈泽瑞
 contact:
-  - { text: "zerui2112@gmail.com", url: "mailto:zerui2112@gmail.com", grad: "2027" }
-  - { text: "hi@zeruic.me", url: "mailto:hi@zeruic.me", grad: "2028" }
+  - { text: "zerui2112@gmail.com", url: "mailto:zerui2112@gmail.com" }
   - { text: "Github: Zerui18", url: "https://github.com/Zerui18" }
   - { text: "LinkedIn: zerui-chen-241015204", url: "https://www.linkedin.com/in/zerui-chen-241015204/" }
   - { text: "My Page: zeruic.me", url: "https://zeruic.me" }
@@ -20,7 +19,7 @@ availability:
     quant: "Graduating Jul 2027 · full-time from summer 2027"
   "2028":
     research: "Graduating Jul 2028 · seeking research engineer / fellowship roles from summer 2028"
-    quant: "Graduating Jul 2028 · full-time from summer 2028"
+    quant: "Graduating Jul 2028 · available for internships Jun–Sep 2027, full-time from summer 2028"
 
 # Section order per variant. Keys refer to the blocks below.
 order:
@@ -77,14 +76,14 @@ experience:
       location: Singapore
       dates: Jul 2026 - Sep 2026
       bullets:
-        - text: "Designed and built a *tiered forecast-evaluation suite* for residualized return forecasts: *headline metrics* spanning accuracy, calibration and a *PnL proxy*, complemented by *diagnostics* for calibration shape, tail effects and realisation dynamics, with *robust inference* throughout via HAC standard errors and simultaneous confidence bands."
-        - text: "Merged into prod. Now focused on improving modelling accuracy with feature engineering and augmented objectives."
+        - text: "Designed and built a *tiered forecast-evaluation suite* for residualized return forecasts: *headline metrics* spanning calibrated accuracy and a PnL proxy, *diagnostics* for calibration shape, tail effects and realisation dynamics, and *robust inference* throughout via HAC standard errors and simultaneous confidence bands, merged into production."
+        - text: "Produced a one-parameter *training recipe* for *LightGBM* return-forecasting models: a single dial walks the *ICIR–Sharpe efficiency frontier* by tuning tree complexity and loss sensitivity to yield training hyperparameters."
     - org: ByteDance, Global E-Commerce
       role: Machine Learning Engineer Intern
       location: Singapore
       dates: Jul 2025 - Sep 2025
       bullets:
-        - text: "Researched and shipped novel and robust *auxiliary objectives* and *model architectural* optimizations for TikTok Global Shop's fine-ranking DL model, trained on in-house *HPC* clusters, achieving *+0.3% revenue lift*."
+        - text: "Researched and shipped *auxiliary objectives* enabling dense ranking supervision under very sparse positive feedback achieving *+0.3% revenue lift* in online A/B tests, and prototyped *model architectural* optimizations using recurrent transformers with per-token early exit for TikTok Shop's fine-ranking model, trained on in-house *HPC* clusters."
         - text: "Built internal tools for interactive model architecture *visualization* and automated *training behavior analysis*."
     - org: "[Competition] NUS Medical Grand Challenge"
       role: Full-Stack & LLM Developer
@@ -93,12 +92,6 @@ experience:
       bullets:
         - text: "Founded medical-AI startup _Tomy_ for remote stoma care and emerged *Grand Champion* amongst 40 teams from universities across Asia, partnering with *5 Singapore public hospitals* with deployed clinical trials."
         - text: "Implemented and deployed image classification API using few-shot prompted vision language model, achieving *100% recall* and *80% precision* in 4-fold cross-validation with extremely scarce training data."
-    - org: Singapore Armed Forces
-      role: Signals & Admin Specialist
-      location: Singapore
-      dates: Jan 2022 - Nov 2023
-      bullets:
-        - text: "Developed duty assignment algorithm with availability constraints, saving hours monthly and improving fairness."
     - org: Agency for Science, Technology and Research
       role: Bio-AI Research Intern
       location: Singapore

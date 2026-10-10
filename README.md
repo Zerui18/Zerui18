@@ -66,7 +66,7 @@
 
 <h3>I'm currently working on</h3>
 
-<p>Now · Sep 2026 — Quant research intern at WorldQuant, interday equity forecasting.</p>
+<p>Now · Oct 2026 — Part II dissertation on context supply and demand in language models (what a model's mechanisms deliver as inputs grow, against what its tasks require), and building Calculemus, an epistemic runtime for research agents.</p>
 
 <table width="100%">
     <tr>
