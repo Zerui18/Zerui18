@@ -41,8 +41,8 @@
             Case-study system: <a href="https://github.com/cheongalc/nanodiscover">nanodiscover</a>.
         </td>
         <td>
-            NeurIPS 2026 workshops (posters) · Oct 2026
-            <br/><sub>New in ML · Interpreting Agent Behavior (IAB) · MetaAgents</sub>
+            NeurIPS 2026 workshops · Oct 2026
+            <br/><sub>Oral at MetaAgents · Poster at Interpreting Agent Behavior (IAB)</sub>
         </td>
     </tr>
     <!-- Evolution Fine-Tuning -->
